@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProductsContext } from '../context/products_context';
 import { single_product_url as url } from '../utils/constants';
@@ -24,16 +24,24 @@ const SingleProductPage = () => {
   } = useProductsContext();
   const { id } = useParams();
 
-  useEffect(() => {
+  const navigateCallback = useCallback(() => {
+    navigate('/');
+  }, [navigate]);
+
+  const fetchSingleProductCallback = useCallback(() => {
     fetchSingleProduct(`${url}${id}`);
-  }, [id]);
+  }, [fetchSingleProduct, id]);
+
+  useEffect(() => {
+    fetchSingleProductCallback();
+  }, [fetchSingleProductCallback]);
   useEffect(() => {
     if (error) {
       setTimeout(() => {
-        navigate('/');
+        navigateCallback();
       }, 3000);
     }
-  });
+  }, [navigateCallback, error]);
 
   if (loading) {
     return <Loading />;

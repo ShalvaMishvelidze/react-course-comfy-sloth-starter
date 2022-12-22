@@ -8,7 +8,6 @@ import Product from './Product';
 
 const FeaturedProducts = () => {
   const {
-    products,
     products_loading: loading,
     products_error: error,
     featured_products: featured,
@@ -30,6 +29,9 @@ const FeaturedProducts = () => {
           return <Product key={product.id} {...product} />;
         })}
       </div>
+      <Link to={'/products'} className="btn">
+        all products
+      </Link>
     </Wrapper>
   );
 };
