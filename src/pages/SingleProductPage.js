@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProductsContext } from '../context/products_context';
 import { single_product_url as url } from '../utils/constants';
@@ -15,6 +15,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const SingleProductPage = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const {
     fetchSingleProduct,
@@ -22,26 +23,20 @@ const SingleProductPage = () => {
     single_product_loading: loading,
     single_product_error: error,
   } = useProductsContext();
-  const { id } = useParams();
-
-  const navigateCallback = useCallback(() => {
-    navigate('/');
-  }, [navigate]);
-
-  const fetchSingleProductCallback = useCallback(() => {
-    fetchSingleProduct(`${url}${id}`);
-  }, [fetchSingleProduct, id]);
 
   useEffect(() => {
-    fetchSingleProductCallback();
-  }, [fetchSingleProductCallback]);
+    fetchSingleProduct(`${url}${id}`);
+    // eslint-disable-next-line
+  }, [id]);
+
   useEffect(() => {
     if (error) {
       setTimeout(() => {
-        navigateCallback();
+        navigate('/');
       }, 3000);
     }
-  }, [navigateCallback, error]);
+    // eslint-disable-next-line
+  }, [error]);
 
   if (loading) {
     return <Loading />;
