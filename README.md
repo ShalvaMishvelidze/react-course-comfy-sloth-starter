@@ -5,6 +5,8 @@
 
 [Link to the finished website by John](https://react-course-comfy-sloth-store.netlify.app/)
 
-### User authentication is done by [Auth0](auth0.com)
+[Link to the finished website by me](https://comfy-store-sm.netlify.app/)
 
-### Payment processing done by [Stripe](stripe.com)
+### User authentication is done by [Auth0](https://auth0.com/)
+
+### Payment processing done by [Stripe](https://stripe.com/)
